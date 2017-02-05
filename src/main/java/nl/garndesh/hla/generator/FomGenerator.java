@@ -26,7 +26,7 @@ public class FomGenerator {
 
     private ModelContainer container;
 
-    public void generate(InputStream fom) throws JAXBException, XMLStreamException, IOException {
+    public void generate(InputStream fom, File output) throws JAXBException, XMLStreamException, IOException {
         container = new ModelContainer();
         container.setModel(getModel(fom));
         container.setCodeModel(new JCodeModel());
@@ -37,7 +37,7 @@ public class FomGenerator {
         //CodecGenerator transcoderGenerator = new CodecGenerator();
         //transcoderGenerator.generate(container);
 
-        saveAndExit();
+        saveAndExit(output);
     }
 
     private HLAObjectModel getModel(InputStream in) throws JAXBException, XMLStreamException {
@@ -52,13 +52,12 @@ public class FomGenerator {
         return (HLAObjectModel) jaxbUnmarshaller.unmarshal(xsr);
     }
 
-    private void saveAndExit() throws IOException {
-        File f = new File("generated");
-        if(f.exists()){
-            cleanupOld(f);
-        }
-        f.mkdirs();
-        container.getCodeModel().build(f);
+    private void saveAndExit(File output) throws IOException {
+        /*if(output.exists()){
+            cleanupOld(output);
+        }*/
+        output.mkdirs();
+        container.getCodeModel().build(output);
     }
 
 

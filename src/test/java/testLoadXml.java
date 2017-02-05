@@ -9,6 +9,7 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
@@ -53,7 +54,7 @@ public class testLoadXml {
     @Test
     public void testGen() throws JAXBException, XMLStreamException, IOException {
         FomGenerator generator = new FomGenerator();
-        generator.generate(getClass().getResourceAsStream("/FRISO-TMS-FOM.xml"));
+        generator.generate(getClass().getResourceAsStream("/FRISO-TMS-FOM.xml"), new File("FOM_generated"));
     }
 
 
